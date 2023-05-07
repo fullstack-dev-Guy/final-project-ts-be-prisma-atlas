@@ -39,13 +39,7 @@ app.use(
 )
 var views: number = 0
 ///////////////////////////////////
-// Serve static assets
-app.use(express.static(path.join(__dirname, 'build')))
 
-// Always serve the index.html file for any request
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
-})
 ///////////////////////////////////
 
 //app.use(function (req, res, next) {
