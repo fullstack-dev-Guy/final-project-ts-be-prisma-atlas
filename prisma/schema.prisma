@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  email          String   @unique
+  displayName    String
+  hash           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  role           Role     @default(user)
+  firebaseUserID String
+  order          Order?   @relation(fields: [orders], references: [id])
+  orders         String[] @db.ObjectId
+}
+
+model Product {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  productname        String
+  productprice       String
+  imageToProduct     String
+  productDescription String
+  productcategory    String
+  quantity           String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  Cart               Cart[]
+}
+
+model Cart {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  product     Product  @relation(fields: [products], references: [id])
+  products    String[] @db.ObjectId
+  role        Role     @default(user)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  ses         String
+  userID      String
+  email       String
+  orderNumber String
+  date        String
+}
+
+model CartArchives {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  cart          String
+  products      String[]
+  role          Role     @default(user)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  ses           String
+  userID        String
+  email         String
+  orderNumber   String
+  date          String
+  itemquantity  Int
+  paymentamount String
+}
+
+model Order {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  User           User[]
+  cart           String
+  role           Role     @default(user)
+  address        String
+  firstname      String
+  lastname       String
+  otherrequest   String
+  orderstatus    String
+  phonenumber    String
+  email          String
+  itemquantity   Int
+  paymentamount  String
+  date           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  firebaseUserID String
+}
+
+enum Role {
+  user
+  admin
+  guest
+  editor
+}
