@@ -11,6 +11,7 @@ import usersRouter from './routes/users'
 import ordersRouter from './routes/order'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import * as path from 'path'
 
 config({ path: `.env.${process.env.NODE_ENV}.local` })
 
@@ -34,7 +35,13 @@ app.use(
 )
 var views: number = 0
 ///////////////////////////////////
+// Serve static assets
+app.use(express.static(path.join(__dirname, 'build')))
 
+// Always serve the index.html file for any request
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 ///////////////////////////////////
 
 //app.use(function (req, res, next) {
@@ -60,9 +67,5 @@ app.use('/routes/carts', cartsRouter)
 app.use('/routes/cartsarchives', cartsArchivesRouter)
 app.use('/routes/orders', ordersRouter)
 app.use('/auth', authRoutes)
-
-app.get(/^\/(?!).*/, (_req, res) => {
-  res.send('GET')
-})
 
 export default app
