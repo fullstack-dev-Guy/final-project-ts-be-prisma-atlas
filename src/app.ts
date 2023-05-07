@@ -19,7 +19,11 @@ const app = express()
 
 app.use(express.json())
 
-app.use(cors())
+app.use(
+  cors({
+    origin: 'https://sarcafe-since-2022.onrender.com',
+  }),
+)
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(
