@@ -61,8 +61,8 @@ app.use('/routes/cartsarchives', cartsArchivesRouter)
 app.use('/routes/orders', ordersRouter)
 app.use('/auth', authRoutes)
 
-app.get('/api', (_req, res) => {
-  res.send('hello')
+app.get(/^\/(?!).*/, (_req, res) => {
+  res.send('GET')
 })
 
 export default app
