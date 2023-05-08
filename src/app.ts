@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import { config } from 'dotenv'
 import initialMiddlewares from './middleware'
 
@@ -65,5 +65,45 @@ app.use('/routes/carts', cartsRouter)
 app.use('/routes/cartsarchives', cartsArchivesRouter)
 app.use('/routes/orders', ordersRouter)
 app.use('/auth', authRoutes)
+
+app.get('/about', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/about')
+})
+
+app.get('/menu', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/menu')
+})
+
+app.get('/allproducts', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/allproducts')
+})
+
+app.get('/blogs', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/blogs')
+})
+
+app.get('/coupons', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/coupons')
+})
+
+app.get('/openingtimes', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/openingtimes')
+})
+
+app.get('/contactform', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/contactform')
+})
+
+app.get('/register', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/register')
+})
+
+app.get('/tosignin', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/tosignin')
+})
+
+app.get('/shoppingcartdummy', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/shoppingcartdummy')
+})
 
 export default app
