@@ -66,8 +66,8 @@ app.use('/routes/cartsarchives', cartsArchivesRouter)
 app.use('/routes/orders', ordersRouter)
 app.use('/auth', authRoutes)
 
-app.get('/about', (req: Request, res: Response) => {
-  res.redirect('https://sarcafe-since-2022.onrender.com')
+app.get('/*', (req: Request, res: Response) => {
+  res.redirect('https://sarcafe-since-2022.onrender.com/notfoundpage')
 })
 
 export default app
